@@ -60,7 +60,7 @@ curl -X DELETE http://localhost:3000/tasks/1
 
 1. Sklonuj repozytorium:
    ```bash
-   git clone <url-twojego-repozytorium>
+   git clone https://github.com/zacniewski/NodeJS-app-for-render-com
    cd NodeJS-app-for-render-com
    ```
 
@@ -76,7 +76,7 @@ curl -X DELETE http://localhost:3000/tasks/1
    Aplikacja będzie dostępna pod adresem: `http://localhost:3000`  
  
 ---
-Przykładowy widok po dodaniu dwóch zadań:  
+Przykładowy widok po dodaniu dwóch zadań (starsza wersja, bez GUI):  
 ![1](screenshots/1.png)
 
 # Tutorial: Wdrożenie na Render.com (Krok po kroku)
@@ -150,13 +150,14 @@ $ curl -X POST https://my-node-app-1xbz.onrender.com/ \
 Z dokumentacji Rendera:  
 > Bezpłatne usługi na Renderze mają ulotny system plików (ang. ephemeral filesystem), co oznacza, że wszelkie zapisane dane (w tym baza SQLite) zostaną usunięte przy każdym wdrożeniu (redeploy) lub ponownym uruchomieniu.
  
-Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków:  
+Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków (widok dla starszej wersji, bez GUI):  
 <br>
 ![5](screenshots/5.png)
 
 
 ### Opcja B: PostgreSQL (Zalecane)
-> W darmowym planie na render.com możesz mieć aktywną tylko jedną (1) bazę danych PostgreSQL dla całej przestrzeni roboczej. 
+> W darmowym planie na `render.com` możesz mieć aktywną tylko jedną (1) bazę danych PostgreSQL dla całej przestrzeni roboczej. 
+
 Kluczowe ograniczenia darmowej bazy PostgreSQL:  
     - Liczba: Maksymalnie 1 aktywna instancja.  
     - Czas działania: Baza wygasa po 30 dniach od utworzenia.  
@@ -168,6 +169,18 @@ Kluczowe ograniczenia darmowej bazy PostgreSQL:
 3. Po utworzeniu bazy, znajdź sekcję **"Internal Database URL"** i skopiuj jej wartość.
 
 > ![Placeholder: Ekran z Internal Database URL w panelu Postgres](screenshots/6.png)
+
+
+> Na platformie Render.com w wersji darmowej (Hobby) możesz mieć
+do 5 przestrzeni roboczych (Hobby workspaces). 
+Oto kluczowe ograniczenia i informacje dotyczące darmowych przestrzeni roboczych (Hobby):  
+
+    - Liczba miejsc: Każda darmowa przestrzeń robocza jest przeznaczona dla jednego użytkownika (single seat).  
+    - Ograniczenia projektów: W ramach darmowego planu możesz utworzyć jeden projekt z maksymalnie dwoma środowiskami (environments).  
+    - Domeny: Możesz dodać maksymalnie dwie własne domeny (custom domains) na jedną przestrzeń roboczą.  
+    - Bazy danych: Tylko jedna darmowa baza danych PostgreSQL może być aktywna w danej przestrzeni roboczej i wygasa ona po 30 dniach.  
+    - Współpraca: Darmowy plan nie umożliwia zapraszania innych członków zespołu do pracy.  
+    - Godziny pracy (Compute Hours): Każda przestrzeń robocza otrzymuje 750 godzin pracy instancji miesięcznie, które są współdzielone między uruchomione darmowe usługi.  
 
 4. Wróć do konfiguracji swojego **Web Service**.  
 ![7](screenshots/7.png)  
