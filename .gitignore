@@ -135,7 +135,7 @@ dist
 !.yarn/versions
 
 # SQLite database
-database.sqlite
+# database.sqlite
 
 # Vite logs files
 vite.config.js.timestamp-*
