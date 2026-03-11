@@ -76,7 +76,7 @@ curl -X DELETE http://localhost:3000/tasks/1
    Aplikacja będzie dostępna pod adresem: `http://localhost:3000`  
  
 ---
-Przykładowy widok po dodaniu dwóch zadań (starsza wersja, bez GUI):  
+Przykładowy widok po dodaniu dwóch zadań (wersja bez GUI, dla endpointa `tasks`):  
 ![1](screenshots/1.png)
 
 # Tutorial: Wdrożenie na Render.com (Krok po kroku)
@@ -96,7 +96,7 @@ Upewnij się, że Twój kod znajduje się w publicznym lub prywatnym repozytoriu
 
 1. W panelu Render kliknij przycisk **"New +"** i wybierz **"Web Service"**.
 
-2. Połącz swoje konto GitHub i wybierz repozytorium `NodeJS-app-for-render-com`.  
+2. Połącz swoje konto GitHub i wybierz swoje repozytorium z aplikacją NodeJS (dla autora było to `NodeJS-app-for-render-com`).  
 ![2](screenshots/2.png)
 
 ## Krok 4: Konfiguracja usługi
@@ -150,7 +150,7 @@ $ curl -X POST https://my-node-app-1xbz.onrender.com/ \
 Z dokumentacji Rendera:  
 > Bezpłatne usługi na Renderze mają ulotny system plików (ang. ephemeral filesystem), co oznacza, że wszelkie zapisane dane (w tym baza SQLite) zostaną usunięte przy każdym wdrożeniu (redeploy) lub ponownym uruchomieniu.
  
-Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków (widok dla starszej wersji, bez GUI):  
+Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków (widok dla wersji bez GUI, dostepnej pod endpointem `tasks`):  
 <br>
 ![5](screenshots/5.png)
 
