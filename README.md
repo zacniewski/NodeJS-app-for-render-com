@@ -92,7 +92,8 @@ Wypełnij formularz konfiguracji następującymi danymi:
 - **Build Command**: `npm install`
 - **Start Command**: `npm start`
 
-W sekcji **Instance Type** wybierz darmowy plan (**Free**).
+W sekcji **Instance Type** wybierz darmowy plan (**Free**).  
+> Nie wciskaj jeszcze `Deploy Web Service`!
 
 ![Formularz konfiguracji usługi na Render](screenshots/3.png)
 
@@ -108,7 +109,9 @@ Jeśli chcesz, aby baza była trwała i profesjonalna, zalecane jest użycie Pos
    - Key: `DATABASE_URL`
    - Value: `./database.sqlite`
 
-> ![Placeholder: Sekcja Environment Variables dla SQLite]
+> ![Placeholder: Sekcja Environment Variables dla SQLite](screenshots/4.png)  
+Teraz możesz wcisnąć `Deploy Web Service`  
+
 
 ### Opcja B: PostgreSQL (Zalecane)
 
