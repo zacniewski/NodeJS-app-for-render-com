@@ -196,7 +196,11 @@ Database synced
 
 3. Gdy status zmieni się na **"Live"**, Twoja aplikacja jest dostępna pod adresem URL widocznym w lewym górnym rogu panelu.
 
-> ![Placeholder: Status Live i link do aplikacji](screenshots/8.png)
+> ![Placeholder: Status Live i link do aplikacji](screenshots/8.png)  
+
+
+Widok usług dla naszego projektu:  
+![9](screenshots/9.png) 
 
 ## Krok 7: Testowanie wdrożonej aplikacji
 
