@@ -11,20 +11,22 @@ app.use(cors());
 app.use(express.json());
 
 // Database setup
-const isPostgres = process.env.DATABASE_URL && process.env.DATABASE_URL.startsWith('postgres');
+const databaseUrl = process.env.DATABASE_URL;
+const isPostgres = databaseUrl && (databaseUrl.startsWith('postgres://') || databaseUrl.startsWith('postgresql://'));
 
 let sequelize;
-if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+if (isPostgres) {
+  sequelize = new Sequelize(databaseUrl, {
     logging: false,
-    dialectOptions: isPostgres ? {
+    dialectOptions: {
       ssl: {
         require: true,
         rejectUnauthorized: false
       }
-    } : {}
+    }
   });
 } else {
+  // Use SQLite as fallback if DATABASE_URL is not provided or is not a valid Postgres URL
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './database.sqlite',
