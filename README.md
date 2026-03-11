@@ -54,9 +54,11 @@ curl -X DELETE http://localhost:3000/tasks/1
    ```bash
    npm start
    ```
-   Aplikacja będzie dostępna pod adresem: `http://localhost:3000`
-
+   Aplikacja będzie dostępna pod adresem: `http://localhost:3000`  
+ 
 ---
+Przykładowy widok po dodaniu dwóch zadań:  
+![1](screenshots/1.png)
 
 # Tutorial: Wdrożenie na Render.com (Krok po kroku)
 
@@ -75,11 +77,8 @@ Upewnij się, że Twój kod znajduje się w publicznym lub prywatnym repozytoriu
 
 1. W panelu Render kliknij przycisk **"New +"** i wybierz **"Web Service"**.
 
-> ![Placeholder: Ekran wyboru New Web Service]
-
-2. Połącz swoje konto GitHub i wybierz repozytorium `NodeJS-app-for-render-com`.
-
-> ![Placeholder: Ekran wyboru repozytorium z GitHub]
+2. Połącz swoje konto GitHub i wybierz repozytorium `NodeJS-app-for-render-com`.  
+![2](screenshots/2.png)
 
 ## Krok 4: Konfiguracja usługi
 
@@ -95,7 +94,7 @@ Wypełnij formularz konfiguracji następującymi danymi:
 
 W sekcji **Instance Type** wybierz darmowy plan (**Free**).
 
-> ![Placeholder: Formularz konfiguracji usługi na Render]
+![Formularz konfiguracji usługi na Render](screenshots/3.png)
 
 ## Krok 5: Konfiguracja bazy danych (SQLite lub PostgreSQL)
 
