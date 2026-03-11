@@ -8,23 +8,42 @@ Prosta aplikacja REST API zbudowana w NodeJS (Express.js) z bazą danych SQLite 
 - Aktualizacja zadań (`PUT /tasks/:id`)
 - Usuwanie zadań (`DELETE /tasks/:id`)
 
-## Przykłady użycia API (cURL)
+## Przykłady użycia
+ 
+Możesz zarządzać zadaniami na dwa sposoby: przez interfejs użytkownika w przeglądarce lub za pomocą zapytań API (cURL).
 
-Poniżej znajdziesz przykłady jak zarządzać zadaniami (zastąp `http://localhost:3000` adresem swojej aplikacji na Renderze, jeśli testujesz w chmurze).
+### 1. Interfejs użytkownika (Przyciski CRUD)
 
-### 1. Dodawanie nowego zadania (Create)
+Po uruchomieniu aplikacji pod adresem `http://localhost:3000`, zobaczysz prosty interfejs z przyciskami:
+
+- **CREATE (Stwórz)**: Pozwala dodać nowe zadanie poprzez wpisanie tytułu w oknie dialogowym.  
+  ![Tworzenie zadania](screenshots/crud_create.png)
+- **READ (Pobierz)**: Odświeża i wyświetla listę wszystkich zadań zapisanych w bazie.  
+  ![Lista zadań](screenshots/crud_read.png)
+- **UPDATE (Zmień)**: Pozwala zmienić tytuł lub status ukończenia zadania na podstawie jego ID.  
+  ![Aktualizacja zadania](screenshots/crud_update.png)
+- **DELETE (Usuń)**: Usuwa zadanie o podanym ID z bazy danych.  
+  ![Usuwanie zadania](screenshots/crud_delete.png)
+
+![Interfejs CRUD z przyciskami](screenshots/crud_interface.png)
+
+### 2. API (cURL)
+
+Poniżej znajdziesz przykłady jak zarządzać zadaniami z poziomu terminala (zastąp `http://localhost:3000` adresem swojej aplikacji na Renderze, jeśli testujesz w chmurze).
+
+#### Dodawanie nowego zadania (Create)
 ```bash
 curl -X POST http://localhost:3000/tasks \
      -H "Content-Type: application/json" \
      -d '{"title": "Kupić mleko"}'
 ```
 
-### 2. Pobieranie wszystkich zadań (Read)
+#### Pobieranie wszystkich zadań (Read)
 ```bash
 curl http://localhost:3000/tasks
 ```
 
-### 3. Aktualizacja zadania (Update)
+#### Aktualizacja zadania (Update)
 Załóżmy, że zadanie ma ID `1`:
 ```bash
 curl -X PUT http://localhost:3000/tasks/1 \
@@ -32,7 +51,7 @@ curl -X PUT http://localhost:3000/tasks/1 \
      -d '{"title": "Kupić mleko i chleb", "completed": true}'
 ```
 
-### 4. Usuwanie zadania (Delete)
+#### Usuwanie zadania (Delete)
 ```bash
 curl -X DELETE http://localhost:3000/tasks/1
 ```
@@ -158,7 +177,7 @@ Kluczowe ograniczenia darmowej bazy PostgreSQL:
 Zapisz zmiany, uruchom deploy (przycisk `Manual Deploy`) i poczekaj na zbudowanie aplikacji.  
 
 
-## Krok 6: Wdrożenie (Deploy)
+## Krok 6: Jak wygląda wdrożenie (Deploy)
 
 1. Kliknij **Create Web Service** na dole strony.
 2. Render rozpocznie proces budowania i wdrażania Twojej aplikacji. Możesz śledzić postęp w konsoli logów.
@@ -204,8 +223,9 @@ Widok usług dla naszego projektu:
 
 ## Krok 7: Testowanie wdrożonej aplikacji
 
-Możesz sprawdzić czy aplikacja działa, wchodząc na jej adres URL w przeglądarce. Zobaczysz prosty interfejs z 4 przyciskami do zarządzania zadaniami (CRUD).
+Możesz sprawdzić, czy aplikacja działa, wchodząc na jej adres URL w przeglądarce. Zobaczysz prosty interfejs z 4 przyciskami do zarządzania zadaniami (CRUD).
 
-Możesz również używać narzędzia typu Postman/cURL, aby odpytać endpoint `/tasks`.
+Możesz również używać narzędzia typu Postman/cURL, aby odpytać endpoint `/tasks`:  
+![10](screenshots/10.png)
 
 Gratulacje! Twoja aplikacja NodeJS działa w chmurze!
