@@ -110,34 +110,93 @@ Jeśli chcesz, aby baza była trwała i profesjonalna, zalecane jest użycie Pos
    - Value: `./database.sqlite`
 
 > ![Placeholder: Sekcja Environment Variables dla SQLite](screenshots/4.png)  
-Teraz możesz wcisnąć `Deploy Web Service`  
+
+Teraz możesz wcisnąć `Deploy Web Service`. Jeśli deploy się powiedzie, to otrzymamy unikalny adres URL naszej aplikacji. Można podjąć probę dodania rekordów do bazy danych:  
+```shell
+$ curl -X POST https://my-node-app-1xbz.onrender.com/ \
+     -H "Content-Type: application/json" \
+     -d '{"title": "Kupić mleko"}'
+     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot POST /</pre>
+</body>
+</html>
+```
+Z dokumentacji Rendera:  
+> Bezpłatne usługi na Renderze mają ulotny system plików (ang. ephemeral filesystem), co oznacza, że wszelkie zapisane dane (w tym baza SQLite) zostaną usunięte przy każdym wdrożeniu (redeploy) lub ponownym uruchomieniu.
+ 
+Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków:  
+<br>
+![5](screenshots/5.png)
 
 
 ### Opcja B: PostgreSQL (Zalecane)
+> W darmowym planie na render.com możesz mieć aktywną tylko jedną (1) bazę danych PostgreSQL dla całej przestrzeni roboczej. 
+Kluczowe ograniczenia darmowej bazy PostgreSQL:  
+    - Liczba: Maksymalnie 1 aktywna instancja.  
+    - Czas działania: Baza wygasa po 30 dniach od utworzenia.  
+    - Pojemność: Limit pamięci to 1 GB SSD.  
+    - Działanie po wygaśnięciu: Po 30 dniach baza staje się niedostępna, masz 14 dni na jej upgrade, w przeciwnym razie dane zostaną usunięte.
 
 1. W Dashboard Render kliknij **"New +"** i wybierz **"PostgreSQL"**.
 2. Wypełnij nazwę bazy (np. `my-database`) i kliknij **Create Database**.
 3. Po utworzeniu bazy, znajdź sekcję **"Internal Database URL"** i skopiuj jej wartość.
 
-> ![Placeholder: Ekran z Internal Database URL w panelu Postgres]
+> ![Placeholder: Ekran z Internal Database URL w panelu Postgres](screenshots/6.png)
 
-4. Wróć do konfiguracji swojego **Web Service**.
-5. W sekcji **Advanced** dodaj zmienną środowiskową:
+4. Wróć do konfiguracji swojego **Web Service**.  
+![7](screenshots/7.png)  
+5. W sekcji **Advanced** (jeśli nowa usługa) dodaj / w sekcji **Manage -> Environment** zmień (jeśli zmieniasz wcześniej ustawioną zmienną środowiskową `DATABASE_URL):
    - Key: `DATABASE_URL`
    - Value: (wklej skopiowany URL, powinien zaczynać się od `postgres://...`)
+Zapisz zmiany, uruchom deploy (przycisk `Manual Deploy`) i poczekaj na zbudowanie aplikacji.  
 
-> ![Placeholder: Sekcja Environment Variables dla Postgres]
 
 ## Krok 6: Wdrożenie (Deploy)
 
 1. Kliknij **Create Web Service** na dole strony.
 2. Render rozpocznie proces budowania i wdrażania Twojej aplikacji. Możesz śledzić postęp w konsoli logów.
 
-> ![Placeholder: Widok logów z procesu budowania/wdrożenia]
+```shell
+==> It looks like we don't have access to your repo, but we'll try to clone it anyway.
+==> Cloning from https://github.com/zacniewski/NodeJS-app-for-render-com
+==> Checking out commit 2db8754a2ac9996c18f12493e41bfc8afa6917af in branch main
+==> Using Node.js version 22.22.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install'...
+added 238 packages, and audited 239 packages in 3s
+31 packages are looking for funding
+  run `npm fund` for details
+7 vulnerabilities (2 low, 5 high)
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+Run `npm audit` for details.
+==> Uploading build...
+==> Uploaded in 3.8s. Compression took 1.7s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'node index.js'
+Server is running on port 10000
+Database synced
+==> Your service is live 🎉
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL https://my-node-app-xcpy.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+```
 
 3. Gdy status zmieni się na **"Live"**, Twoja aplikacja jest dostępna pod adresem URL widocznym w lewym górnym rogu panelu.
 
-> ![Placeholder: Status Live i link do aplikacji]
+> ![Placeholder: Status Live i link do aplikacji](screenshots/8.png)
 
 ## Krok 7: Testowanie wdrożonej aplikacji
 
