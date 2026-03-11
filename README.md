@@ -81,7 +81,17 @@ Przykładowy widok po dodaniu dwóch zadań (wersja bez GUI, dla endpointa `task
 
 # Tutorial: Wdrożenie na Render.com (Krok po kroku)
 
-Ten przewodnik pomoże Ci wdrożyć tę aplikację na platformie Render.com.
+Ten przewodnik pomoże Ci wdrożyć tę aplikację na platformie Render.com.  
+> Na platformie Render.com w wersji darmowej (Hobby) możesz mieć
+do 5 przestrzeni roboczych (Hobby workspaces). 
+Oto kluczowe ograniczenia i informacje dotyczące darmowych przestrzeni roboczych (Hobby):  
+    - Liczba miejsc: Każda darmowa przestrzeń robocza jest przeznaczona dla jednego użytkownika (single seat).  
+    - Ograniczenia projektów: W ramach darmowego planu możesz utworzyć jeden projekt z maksymalnie dwoma środowiskami (environments).  
+    - Domeny: Możesz dodać maksymalnie dwie własne domeny (custom domains) na jedną przestrzeń roboczą.  
+    - Bazy danych: Tylko jedna darmowa baza danych PostgreSQL może być aktywna w danej przestrzeni roboczej i wygasa ona po 30 dniach.  
+    - Współpraca: Darmowy plan nie umożliwia zapraszania innych członków zespołu do pracy.  
+    - Godziny pracy (Compute Hours): Każda przestrzeń robocza otrzymuje 750 godzin pracy instancji miesięcznie, które są współdzielone między uruchomione darmowe usługi.  
+
 
 ## Krok 1: Przygotowanie repozytorium GitHub
 
@@ -150,7 +160,7 @@ $ curl -X POST https://my-node-app-1xbz.onrender.com/ \
 Z dokumentacji Rendera:  
 > Bezpłatne usługi na Renderze mają ulotny system plików (ang. ephemeral filesystem), co oznacza, że wszelkie zapisane dane (w tym baza SQLite) zostaną usunięte przy każdym wdrożeniu (redeploy) lub ponownym uruchomieniu.
  
-Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków (widok dla wersji bez GUI, dostepnej pod endpointem `tasks`):  
+Ale ponieważ wcześniej do bazy dodane były rekordy lokalnie, to można podjąć próbę odczytu tasków (widok dla wersji bez GUI, dostępnej pod endpointem `tasks`):  
 <br>
 ![5](screenshots/5.png)
 
@@ -169,18 +179,6 @@ Kluczowe ograniczenia darmowej bazy PostgreSQL:
 3. Po utworzeniu bazy, znajdź sekcję **"Internal Database URL"** i skopiuj jej wartość.
 
 > ![Placeholder: Ekran z Internal Database URL w panelu Postgres](screenshots/6.png)
-
-
-> Na platformie Render.com w wersji darmowej (Hobby) możesz mieć
-do 5 przestrzeni roboczych (Hobby workspaces). 
-Oto kluczowe ograniczenia i informacje dotyczące darmowych przestrzeni roboczych (Hobby):  
-
-    - Liczba miejsc: Każda darmowa przestrzeń robocza jest przeznaczona dla jednego użytkownika (single seat).  
-    - Ograniczenia projektów: W ramach darmowego planu możesz utworzyć jeden projekt z maksymalnie dwoma środowiskami (environments).  
-    - Domeny: Możesz dodać maksymalnie dwie własne domeny (custom domains) na jedną przestrzeń roboczą.  
-    - Bazy danych: Tylko jedna darmowa baza danych PostgreSQL może być aktywna w danej przestrzeni roboczej i wygasa ona po 30 dniach.  
-    - Współpraca: Darmowy plan nie umożliwia zapraszania innych członków zespołu do pracy.  
-    - Godziny pracy (Compute Hours): Każda przestrzeń robocza otrzymuje 750 godzin pracy instancji miesięcznie, które są współdzielone między uruchomione darmowe usługi.  
 
 4. Wróć do konfiguracji swojego **Web Service**.  
 ![7](screenshots/7.png)  
