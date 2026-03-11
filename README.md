@@ -204,6 +204,8 @@ Widok usług dla naszego projektu:
 
 ## Krok 7: Testowanie wdrożonej aplikacji
 
-Możesz sprawdzić czy aplikacja działa, wchodząc na jej adres URL w przeglądarce lub używając narzędzia typu Postman/cURL, aby odpytać endpoint `/tasks`.
+Możesz sprawdzić czy aplikacja działa, wchodząc na jej adres URL w przeglądarce. Zobaczysz prosty interfejs z 4 przyciskami do zarządzania zadaniami (CRUD).
+
+Możesz również używać narzędzia typu Postman/cURL, aby odpytać endpoint `/tasks`.
 
 Gratulacje! Twoja aplikacja NodeJS działa w chmurze!

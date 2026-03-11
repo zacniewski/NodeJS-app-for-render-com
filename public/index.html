@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - CRUD Buttons</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 0 10px; }
+        .buttons { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        button { padding: 10px 20px; cursor: pointer; border: none; border-radius: 4px; color: white; font-weight: bold; }
+        .btn-create { background-color: #28a745; }
+        .btn-read { background-color: #007bff; }
+        .btn-update { background-color: #ffc107; color: black; }
+        .btn-delete { background-color: #dc3545; }
+        #output { background: #f4f4f4; padding: 15px; border-radius: 5px; min-height: 50px; }
+        .task-item { border-bottom: 1px solid #ccc; padding: 10px 0; }
+        .task-item:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <h1>Menedżer Zadań (CRUD)</h1>
+    <div class="buttons">
+        <button class="btn-create" onclick="createTask()">1. CREATE (Stwórz)</button>
+        <button class="btn-read" onclick="readTasks()">2. READ (Pobierz)</button>
+        <button class="btn-update" onclick="updateTask()">3. UPDATE (Zmień)</button>
+        <button class="btn-delete" onclick="deleteTask()">4. DELETE (Usuń)</button>
+    </div>
+
+    <div id="output">Wyniki pojawią się tutaj...</div>
+
+    <script>
+        const output = document.getElementById('output');
+
+        async function createTask() {
+            const title = prompt("Podaj tytuł nowego zadania:");
+            if (!title) return;
+
+            try {
+                const response = await fetch('/tasks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title })
+                });
+                const data = await response.json();
+                alert("Utworzono zadanie!");
+                readTasks();
+            } catch (error) {
+                output.innerText = "Błąd: " + error.message;
+            }
+        }
+
+        async function readTasks() {
+            try {
+                const response = await fetch('/tasks');
+                const data = await response.json();
+                
+                if (data.length === 0) {
+                    output.innerText = "Brak zadań w bazie.";
+                    return;
+                }
+
+                output.innerHTML = "<strong>Lista zadań:</strong><br>";
+                data.forEach(task => {
+                    output.innerHTML += `<div class="task-item">
+                        <strong>ID: ${task.id}</strong> | ${task.title} | ${task.completed ? '✅ Ukończone' : '❌ W toku'}
+                    </div>`;
+                });
+            } catch (error) {
+                output.innerText = "Błąd: " + error.message;
+            }
+        }
+
+        async function updateTask() {
+            const id = prompt("Podaj ID zadania do zmiany:");
+            if (!id) return;
+            
+            const title = prompt("Podaj nowy tytuł (anuluj aby nie zmieniać):");
+            const completed = confirm("Czy zadanie jest ukończone? (OK = Tak, Anuluj = Nie)");
+
+            const body = {};
+            if (title !== null && title !== "") body.title = title;
+            body.completed = completed;
+
+            try {
+                const response = await fetch(`/tasks/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                if (!response.ok) throw new Error("Nie znaleziono zadania lub błąd serwera");
+                alert("Zadanie zaktualizowane!");
+                readTasks();
+            } catch (error) {
+                output.innerText = "Błąd: " + error.message;
+            }
+        }
+
+        async function deleteTask() {
+            const id = prompt("Podaj ID zadania do usunięcia:");
+            if (!id) return;
+
+            if (!confirm(`Czy na pewno chcesz usunąć zadanie o ID ${id}?`)) return;
+
+            try {
+                const response = await fetch(`/tasks/${id}`, {
+                    method: 'DELETE'
+                });
+                if (response.status === 204) {
+                    alert(`Zadanie o ID ${id} zostało usunięte.`);
+                    readTasks();
+                } else {
+                    throw new Error("Nie znaleziono zadania");
+                }
+            } catch (error) {
+                output.innerText = "Błąd: " + error.message;
+            }
+        }
+        
+        // Wstępne ładowanie
+        readTasks();
+    </script>
+</body>
+</html>

@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 // Database setup
 const databaseUrl = process.env.DATABASE_URL;
@@ -53,7 +54,7 @@ sequelize.sync().then(() => {
 
 // API Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the Task API!' });
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Get all tasks
